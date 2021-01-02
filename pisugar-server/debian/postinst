@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# Enable i2c
+raspi-config nonint do_i2c 0
+
+if [ -e /usr/share/debconf/confmodule ]; then
+  OPTS="--config config.json"
+
+  . /usr/share/debconf/confmodule
+
+  db_get pisugar-server/model
+  OPTS="$OPTS --model '$RET'"
+
+  db_get pisugar-server/address
+  ADDR="$RET"
+
+  db_get pisugar-server/web
+  if test "x$RET" = "xtrue"; then
+    OPTS="$OPTS --web /usr/share/pisugar-server/web --http $ADDR:8421 --ws $ADDR:8422 "
+  fi
+
+  db_get pisugar-server/tcp
+  if test "x$RET" = "xtrue"; then
+    OPTS="$OPTS --tcp $ADDR:8423"
+  fi
+
+  db_get pisugar-server/uds
+  if test "x$RET" = "xtrue"; then
+    OPTS="$OPTS --uds /tmp/pisugar-server.sock"
+  fi
+
+  echo "OPTS=$OPTS" >/etc/default/pisugar-server
+fi
+
+deb-systemd-helper unmask pisugar-server.service >/dev/null || true
+if deb-systemd-helper --quiet was-enabled pisugar-server.service; then
+  deb-systemd-helper enable pisugar-server.service >/dev/null || true
+  deb-systemd-invoke start pisugar-server.service
+else
+  deb-systemd-helper update-state pisugar-server.service >/dev/null || true
+fi

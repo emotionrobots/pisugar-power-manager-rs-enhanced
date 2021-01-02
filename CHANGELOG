@@ -1,0 +1,51 @@
+v1.4.8
+1. Add auto_power_on mode (conflict with alarm)
+
+v1.4.7
+1. Bug fixed
+2. Support arm64
+3. Rpm packages
+
+v1.4.4
+1. Bugs fixed
+
+
+v1.4.3
+1. Support latest model PiSugar 2 with 2-LEDs and PiSugar 2 Pro with no LEDs
+   (improved charging control)
+2. Set RTC timezone to UTC
+
+
+v1.4.1
+1. Some updates
+
+
+v1.4.0
+Bug fix:
+1. Fix RTC repeat
+2. Fix poweroff bug
+
+
+v1.3.0
+Improvements:
+1. Support i18n
+2. Optimize button shell execution
+
+
+v1.2.0
+Improvements:
+1. Smooth battery status
+2. Add pisugar-server syslog option(--syslog)
+3. Add pisugar-server debug option(--debug)
+4. Add pisugar-server safe shutdown delay
+
+Bug fix:
+1. Fix RTC alarm time
+
+
+v1.1.0
+Add pisugar-poweroff module
+
+
+v1.0.0
+First release

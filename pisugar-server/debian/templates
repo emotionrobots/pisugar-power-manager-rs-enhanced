@@ -1,0 +1,31 @@
+Template: pisugar-server/address
+Type: select
+Choices: 0.0.0.0, 127.0.0.1
+Default: 0.0.0.0
+Description: PiSugar server listening address ('127.0.0.1' to disallow public access).
+
+Template: pisugar-server/web
+Type: boolean
+Default: true
+Description: Enable http server on port 8421, and websocket on port 8422.
+
+Template: pisugar-server/tcp
+Type: boolean
+Default: true
+Description: Enable tcp server on port 8423.
+
+Template: pisugar-server/uds
+Type: boolean
+Default: true
+Description: Enable uds server on /tmp/pisugar-server.sock.
+
+Template: pisugar-server/led
+Type: select
+Choices: 4, 2
+Description: PiSugar 2 battery status-indicating LED amount (choose 2 for PiSugar 2 Pro with no LEDs).
+
+Template: pisugar-server/model
+Type: select
+Choices: PiSugar 2 (4-LEDs), PiSugar 2 (2-LEDs), PiSugar 2 Pro
+Description: PiSugar model. Select the correct model, otherwise pisugar-server could not work as expected.
+    Don't worry, it could be reconfigured with 'sudo dpkg-reconfigure pisugar-server'.
